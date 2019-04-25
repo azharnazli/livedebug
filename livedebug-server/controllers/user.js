@@ -3,12 +3,14 @@ const regis = require('../helpers/register');
 const jwt = require('../helpers/token');
 
 class UserController {
+
   static register(req, res) {
     let user = {
       email: req.body.email,
       password: req.body.password
     };
 
+    
     User.create(user)
     .then(user => {
       res.status(201).json(user);
@@ -26,7 +28,7 @@ class UserController {
 
   static login(req, res) {
     User
-     .findOne(req.body.email)
+     .findOne({email : req.body.email})
      .then(user => {
        if (user) {
          if (regis.checkPassword(req.body.password, user.password)) {

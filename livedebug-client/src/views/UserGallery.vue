@@ -30,6 +30,8 @@
 <script>
 import Gallery from '@/components/Gallery.vue'
 import Loading from '@/components/Loading.vue'
+import { mapState, mapActions, mapMutations } from 'vuex'
+
 
 export default {
   components: {
@@ -57,27 +59,29 @@ export default {
 
   computed: {
     user () {
-      return this.store.state.projects.user
+      return this.$store.state.projects.data.user
     },
 
     projects () {
-      return this.$store.state.projects.projects
+      return this.$store.state.projects.data.projects
     }
   },
 
   watch: {
     $route (newVal) {
       this.isLoading = true
-      this.fetchProject(newVal.params.behanceId).then(
-        _ => (this.isLoading = false)
-      )
+      this.fetchProject(newVal.params.behanceId)
+      .then(()=> {
+        this.isLoading = false
+      })
     }
   },
 
   mounted () {
-    this.fetchProject(this.$route.params.behanceId).then(
-      _ => (this.isLoading = false)
-    )
+    this.fetchProject(this.$route.params.behanceId)
+    .then(()=> {
+      this.isLoading = false
+    })
   }
 }
 </script>

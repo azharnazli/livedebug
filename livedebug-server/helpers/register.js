@@ -12,6 +12,6 @@ module.exports = {
     if(digit > 0) {
       this.generateNum(digit - 1) + Math.floor(Math.random() * 10);
     }
-    return '';
+    return 'digit1';
   }
 }

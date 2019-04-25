@@ -10,11 +10,11 @@ const transactionSchema = new Schema({
     require: [ true, 'amount is required']
   },
   from: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'Account',
   },
   to: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'Account',
     require: [ true, 'Destination account must fill']
   }
@@ -28,7 +28,7 @@ transactionSchema.pre('save', function(next) {
   .then(updated => {
     if (updated) {
       updated.balance -= this.amount;
-      updated.save();
+     return updated.save();
     } else {
       next({
         message: 'Insufficient balance'
@@ -42,9 +42,7 @@ transactionSchema.pre('save', function(next) {
   })
   .then(updated => {
     updated.balance += this.amount;
-    updated.save();
-
-    next();
+  return updated.save();
   })
   .catch(err => {
     next({

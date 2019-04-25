@@ -30,7 +30,6 @@ describe('Users', function() {
        .send(user)
        .end(function(err, res) {
          expect(err).to.be.null;
-
          expect(res).to.have.status(201);
          expect(res.body).to.be.an('object');
          expect(res.body).to.have.property('_id');
@@ -104,7 +103,6 @@ describe('Users', function() {
        .send(user)
        .end(function(err, res) {
          expect(err).to.be.null;
-
          expect(res).to.have.status(200);
          expect(res.body).to.have.property('token');
          expect(res.body).to.have.property('_id');

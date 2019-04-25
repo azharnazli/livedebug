@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <navigation :counter="this.favorites.length"/>
+    <navigation :counter="favorites.length"/>
     <router-view :myFavorite="myFavorite" @favorites="favorites"/>
   </div>
 </template>
@@ -20,9 +20,10 @@ export default {
     Navigation
   },
 
-  method: {
+  methods: {
     myFavorite (data) {
-      this.favorites = this.favorites.concat(data)
+      console.log(data)
+     this.favorites = this.favorites.concat(data)
     }
   }
 }

@@ -21,7 +21,7 @@
       </div>
     </div>
 
-    <routing-view @myFavorite="myFavorite"/>
+    <router-view @myFavorite="myFavorite"/>
   </div>
 </template>
 
@@ -63,9 +63,7 @@ export default {
   },
 
   mounted () {
-    this.fetchUser().then(data => {
-      this.isLoading = false
-    })
+    this.fetchUser()
   }
 }
 </script>
